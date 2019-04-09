@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/back"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="80dp"
+    tools:context=".MainActivity">
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorText" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorText" />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+
+        android:id="@+id/btn_products"
+        android:layout_width="match_parent"
+        android:background="@drawable/btn_round"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Login"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorText"
+        android:alpha="0.6"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimaryDark"/>
+
+
+    <Button
+
+        android:id="@+id/btn_win_regist"
+        android:layout_width="match_parent"
+        android:background="@drawable/btn_round"
+        android:layout_height="35dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Register Now !"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorText"
+        android:alpha="0.9"/>
+
+</LinearLayout>
