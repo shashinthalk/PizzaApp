@@ -1,88 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/product_back"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@mipmap/product_back_new"
+    tools:context=".LoginActivity">
+
 
 
         <TableLayout
+            android:id="@+id/table1"
+            android:background="@color/colorHeaderBack"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:paddingLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_height="50dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="10dp"
+                    android:layout_height="50dp"/>
+
+                <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    />
+
+                <TextView
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic"
+                    android:text="Name"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:id="@+id/text_view_login"
+                    android:layout_width="180dp"
+                    android:layout_height="25dp"/>
 
                 <Button
-                    android:id="@+id/btn_One"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:id="@+id/btn_logout"
+                    android:background="@mipmap/logout"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"/>
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-                <Button
-                    android:id="@+id/button8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-
-                <Button
-                    android:id="@+id/button9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/addvertiestment"
-                    android:padding="100dp"
-                    android:layout_marginBottom="10dp"/>
-
+            </TableRow>
 
         </TableLayout>
-</ScrollView>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_below="@+id/table1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+
+
+
+</RelativeLayout>
