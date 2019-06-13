@@ -259,11 +259,32 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://172.19.4.122:8080/system/loginUser?email="+email+"&password="+password+"",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            try {
+                            String res = response;
+                            if(res.equals("Email is incorrect")||res.equals("Password is incorrect")){
+                                loading.setVisibility(View.GONE);
+                                button2.setVisibility(View.VISIBLE);
+                                btn_after.setVisibility(View.VISIBLE);
+                                button1.setVisibility(View.GONE);
+                                btn_after.setError("RegisterActivity first");
+                                Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
+                            }else if(!res.equals("")){
+                                Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
+                                openProducts(res,sentURL);
+                                loading.setVisibility(View.GONE);
+                                button2.setVisibility(View.VISIBLE);
+                            }else{
+                                loading.setVisibility(View.GONE);
+                                button2.setVisibility(View.VISIBLE);
+                                btn_after.setVisibility(View.VISIBLE);
+                                button1.setVisibility(View.GONE);
+                                btn_after.setError("RegisterActivity first");
+                                Toast.makeText(LoginActivity.this,"User name or Password is incorrect!" ,Toast.LENGTH_SHORT).show();
+                            }
+                            /*try {
                                 JSONArray Products = new JSONArray(response);
 
                                 for (int i=0; i<Products.length(); i++){
@@ -288,8 +309,9 @@ public class LoginActivity extends AppCompatActivity {
                                 }
 
                             } catch (JSONException e) {
+                                Toast.makeText(LoginActivity.this,response,Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
-                            }
+                            }*/
                         }
                     },
                     new Response.ErrorListener() {

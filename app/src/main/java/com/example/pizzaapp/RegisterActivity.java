@@ -106,11 +106,11 @@ public class RegisterActivity extends AppCompatActivity {
                             if(mobile_number.length()==10){
                                 if(password.length()>5){
                                     if (password.equals(c_password)){
-                                        StringRequest stringRequest = new StringRequest(Request.Method.GET,"http://172.16.27.21:8080/system/addNewUser?name="+name+"&email="+email+"&mobile="+mobile_number+"&password="+password+"",
+                                        StringRequest stringRequest = new StringRequest(Request.Method.GET,"http://172.19.4.122:8080/system/addNewUser?name="+name+"&email="+email+"&mobile="+mobile_number+"&password="+password+"",
                                                 new Response.Listener<String>(){
                                                     @Override
                                                     public void onResponse(String response){
-                                                        if(response.equals("1")){
+                                                        if(response.equals("Successfully Registered")){
                                                             name_t.setText("");
                                                             email_t.setText("");
                                                             password_t.setText("");
@@ -118,11 +118,11 @@ public class RegisterActivity extends AppCompatActivity {
                                                             mobile_number_t.setText("");
                                                             loading.setVisibility(View.GONE);
                                                             btn_regist.setVisibility(View.VISIBLE);
-                                                            Toast.makeText(RegisterActivity.this,"RegisterActivity Success!"+response, Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(RegisterActivity.this,response, Toast.LENGTH_SHORT).show();
                                                         }else{
                                                             loading.setVisibility(View.GONE);
                                                             btn_regist.setVisibility(View.VISIBLE);
-                                                            Toast.makeText(RegisterActivity.this,"RegisterActivity error!"+response, Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(RegisterActivity.this,response, Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 },

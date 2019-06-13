@@ -103,7 +103,7 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://172.16.27.21:8080/system/getAllProducts",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://172.19.4.122:8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
