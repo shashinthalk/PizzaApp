@@ -1,7 +1,10 @@
 package com.example.pizzaapp;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,7 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-
+    Dialog myDialog;
+    private static String ip = "";
     private static String sts_now ="";
     private EditText email, password;
     private ProgressBar loading;
@@ -42,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        myDialog = new Dialog(this);
         connection_detector=new Connection_Detector(this);
         localServer = findViewById(R.id.localServer);
         onlineServer = findViewById(R.id.OnlineServer);
@@ -50,7 +56,9 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.log_password);
         btn_after = findViewById(R.id.btn_win_after_regist);
         btn_after.setVisibility(View.GONE);
-
+        Intent intent = getIntent();
+        ShowPopup();
+        ip = intent.getStringExtra("ip");
         if (connection_detector.isConnected())
         {
         }else
@@ -60,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
         try
         {
-            Intent intent = getIntent();
+
             final String sts = intent.getStringExtra("sts");
             if(sts=="1"){
                 sts_now="0";
@@ -184,11 +192,14 @@ public class LoginActivity extends AppCompatActivity {
                     String mEmail = email.getText().toString().trim();
                     String mPassword = password.getText().toString().trim();
 
-                    if(!mEmail.isEmpty() || !mPassword.isEmpty()){
-                        login(mEmail,mPassword);
+                    if(!mEmail.isEmpty()){
+                        if(!mPassword.isEmpty()){
+                            login(mEmail,mPassword);
+                        }else{
+                            password.setError("Please insert Password");
+                        }
                     }else{
                         email.setError("Please insert email");
-                        password.setError("Please insert Password");
                     }
 
                 }else
@@ -356,6 +367,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("sentURL", sentURL);
         intent.putExtra("name", name);
         intent.putExtra("sts", sts_now);
+        intent.putExtra("ip", ip);
         startActivity(intent);
         email.setText("");
         password.setText("");
@@ -367,4 +379,25 @@ public class LoginActivity extends AppCompatActivity {
         System.exit(1);
     }
 
+    public void openSettings(View view) {
+        Intent intent = new Intent(this,SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void ShowPopup() {
+        TextView txtclose;
+        Button btnFollow;
+        myDialog.setContentView(R.layout.activity_ippopup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+        //btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
 }

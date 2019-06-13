@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeLogin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NotConnectionActivity"
+        <activity android:name=".SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".NotConnectionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"

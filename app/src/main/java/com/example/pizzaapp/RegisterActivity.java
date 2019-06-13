@@ -1,5 +1,6 @@
 package com.example.pizzaapp;
 
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btn_regist;
     private ProgressBar loading;
     //private static String URL_REGIST="http://192.168.43.66/register.php";
-    private static String URL_REGIST="";
+    //private static String URL_REGIST="";
 
 
     @Override
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_regist = findViewById(R.id.btn_regist);
         mobile_number_t = findViewById(R.id.mobile);
         Intent intent = getIntent();
-        URL_REGIST = intent.getStringExtra("url");
+        //URL_REGIST = intent.getStringExtra("url");
 
         btn_regist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,28 +106,23 @@ public class RegisterActivity extends AppCompatActivity {
                             if(mobile_number.length()==10){
                                 if(password.length()>5){
                                     if (password.equals(c_password)){
-                                        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+                                        StringRequest stringRequest = new StringRequest(Request.Method.GET,"http://172.16.27.21:8080/system/addNewUser?name="+name+"&email="+email+"&mobile="+mobile_number+"&password="+password+"",
                                                 new Response.Listener<String>(){
                                                     @Override
                                                     public void onResponse(String response){
-                                                        try{
-                                                            JSONObject jsonObject = new JSONObject(response);
-                                                            String success = jsonObject.getString("success");if(success.equals("1")){
-                                                                Toast.makeText(RegisterActivity.this,"RegisterActivity Success!", Toast.LENGTH_SHORT).show();
-                                                                name_t.setText("");
-                                                                email_t.setText("");
-                                                                password_t.setText("");
-                                                                c_password_t.setText("");
-                                                                mobile_number_t.setText("");
-                                                                loading.setVisibility(View.GONE);
-                                                                btn_regist.setVisibility(View.VISIBLE);
-                                                            }
-
-                                                        }catch (JSONException e){
-                                                            e.printStackTrace();
-                                                            Toast.makeText(RegisterActivity.this,"RegisterActivity Error!" + e.toString(), Toast.LENGTH_SHORT).show();
+                                                        if(response.equals("1")){
+                                                            name_t.setText("");
+                                                            email_t.setText("");
+                                                            password_t.setText("");
+                                                            c_password_t.setText("");
+                                                            mobile_number_t.setText("");
                                                             loading.setVisibility(View.GONE);
                                                             btn_regist.setVisibility(View.VISIBLE);
+                                                            Toast.makeText(RegisterActivity.this,"RegisterActivity Success!"+response, Toast.LENGTH_SHORT).show();
+                                                        }else{
+                                                            loading.setVisibility(View.GONE);
+                                                            btn_regist.setVisibility(View.VISIBLE);
+                                                            Toast.makeText(RegisterActivity.this,"RegisterActivity error!"+response, Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 },

@@ -1,134 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/back"
+    android:background="@color/colorPrimaryDark2"
     android:orientation="vertical"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
-    android:paddingTop="80dp"
+    android:paddingTop="30dp"
     tools:context=".LoginActivity">
 
-
-
-    <android.support.design.widget.TextInputLayout
-
-        android:layout_marginTop="140dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/log_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorText" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-
-        <EditText
-            android:id="@+id/log_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="@color/colorText" />
-    </android.support.design.widget.TextInputLayout>
-
-
-
-    <ProgressBar
-        android:id="@+id/log_loading"
-        android:layout_marginTop="30dp"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-
-        android:id="@+id/btn_products"
-        android:layout_width="match_parent"
-        android:background="@drawable/btn_round"
-        android:layout_height="40dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Login"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorText"
-        android:alpha="0.6"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimaryDark"/>
-
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <Button
 
-            android:id="@+id/btn_win_regist"
-            android:layout_width="200dp"
-            android:background="@drawable/btn_round"
-            android:layout_height="35dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Register Now !"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorText"
-            android:alpha="0.9"/>
-
-        <Button
-
-            android:id="@+id/btn_win_after_regist"
-            android:layout_width="200dp"
-            android:background="@drawable/btn_round"
-            android:layout_height="35dp"
-            android:backgroundTint="@color/colorstasus"
-            android:text="Register Now !"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorText"
-            android:alpha="0.9"/>
-
-        <Button
-
-            android:id="@+id/facebook"
-            android:layout_width="45dp"
-            android:background="@mipmap/facebook"
-            android:layout_height="45dp"
-            android:layout_marginLeft="200dp"
-
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorText"
-            android:alpha="0.9"/>
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <CheckBox
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Local Server"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="20dp"
-            android:id="@+id/localServer"/>
-        <CheckBox
-            android:layout_marginLeft="150dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Online Server"
-            android:layout_marginTop="10dp"
-            android:id="@+id/OnlineServer"/>
-    </RelativeLayout>
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/logoLayout"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:src="@mipmap/logo"/>
 
-</LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/logoLayout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailLayout">
+                <EditText
+                    android:textColorHint="@color/white"
+                    android:id="@+id/log_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/emailLayout"
+                android:id="@+id/passwordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:textColorHint="@color/white"
+                    android:id="@+id/log_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorText" />
+            </LinearLayout>
+
+
+
+            <ProgressBar
+                android:id="@+id/log_loading"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_products"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_round"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Login"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorText"
+                android:alpha="0.6"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimaryDark"/>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+
+                    android:id="@+id/btn_win_regist"
+                    android:layout_width="150dp"
+                    android:background="@drawable/btn_round"
+                    android:layout_height="35dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="Register Now !"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorText"
+                    android:alpha="0.9"/>
+
+                <Button
+
+                    android:id="@+id/btn_win_after_regist"
+                    android:layout_width="150dp"
+                    android:background="@drawable/btn_round"
+                    android:layout_height="35dp"
+                    android:backgroundTint="@color/colorstasus"
+                    android:text="Register Now !"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorText"
+                    android:alpha="0.9"/>
+
+                <Button
+
+                    android:id="@+id/facebook"
+                    android:layout_width="45dp"
+                    android:background="@mipmap/facebook"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/colorText"
+                    android:alpha="0.9"/>
+
+                <Button
+                    android:onClick="openSettings"
+                    android:layout_marginTop="13dp"
+                    android:id="@+id/settings"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="210dp"
+                    android:background="@mipmap/settings_icon"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Local Server"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:id="@+id/localServer"/>
+                <CheckBox
+                    android:layout_marginLeft="150dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Online Server"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/OnlineServer"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

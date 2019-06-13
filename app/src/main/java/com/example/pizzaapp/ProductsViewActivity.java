@@ -34,7 +34,7 @@ import java.util.List;
 public class ProductsViewActivity extends AppCompatActivity {
     //private static String PRODUCT_URL="http://msrpromotion.lk/pizza.lk/api.php";
     //private static String PRODUCT_URL="http://192.168.43.66/api.php";
-    private static final String PRODUCT_URL = "http://172.19.4.122:8080/demo/all";
+    //private static final String PRODUCT_URL = ;
     private static String sts_now = "";
     //private static String PRODUCT_URL = "";
     //SwipeRefreshLayout swipe;
@@ -44,13 +44,14 @@ public class ProductsViewActivity extends AppCompatActivity {
     private Button button;
     private Button button_logout;
     private TextView name;
-
+    private static String ip = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         name = findViewById(R.id.text_view_login);
         Intent intent = getIntent();
+        ip = intent.getStringExtra("ip");
         String extraName = intent.getStringExtra("name");
         //PRODUCT_URL = intent.getStringExtra("sentURL");
         name.setText("Hi " + extraName);
@@ -102,7 +103,7 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, PRODUCT_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://172.16.27.21:8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
