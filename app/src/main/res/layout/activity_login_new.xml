@@ -9,8 +9,10 @@
     tools:context=".LoginActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <ImageView
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+
                 android:id="@+id/tv_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,11 +41,47 @@
                 android:textSize="30dp"/>
 
             <LinearLayout
+                android:id="@+id/line01"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/tv_login"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/layout_txt_user_name"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_marginTop="50dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Email"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        />
+                    <EditText
+                        android:id="@+id/log_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_background"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"/>
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/layout_txt_user_name"
+                    android:id="@+id/layout_txt_user_password"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -50,16 +89,116 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="User name"
+                        android:text="Password"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="15dp"
                         />
+                    <EditText
+                        android:id="@+id/log_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_background"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"/>
+
                 </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line01">
+
+                <ProgressBar
+                    android:id="@+id/log_loading"
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btn_products"
+                    android:textSize="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/line01"
+                    android:text="Login Now"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
+                    android:background="@drawable/btn_background"/>
+
+                <Button
+                    android:id="@+id/facebook"
+                    android:layout_width="45dp"
+                    android:background="@mipmap/facebook"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorText"
+                    android:alpha="0.9"/>
             </LinearLayout>
 
         </RelativeLayout>
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_above="@+id/layout_btn_line02"
+        android:id="@+id/layout_checkbox"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Local Server"
+            android:id="@+id/localServer"/>
+        <CheckBox
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Online Server"
+            android:id="@+id/OnlineServer"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_btn_line02"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_win_regist"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="Signup Now"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="Fogot password"
+            android:textAllCaps="false"/>
     </RelativeLayout>
 
 </RelativeLayout>

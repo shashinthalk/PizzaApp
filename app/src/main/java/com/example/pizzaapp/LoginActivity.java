@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         loading = findViewById(R.id.log_loading);
         email = findViewById(R.id.log_email);
         password = findViewById(R.id.log_password);
-        btn_after = findViewById(R.id.btn_win_after_regist);
         btn_after.setVisibility(View.GONE);
         Intent intent = getIntent();
         ShowPopup();
@@ -404,10 +403,7 @@ public class LoginActivity extends AppCompatActivity {
         System.exit(1);
     }
 
-    public void openSettings(View view) {
-        Intent intent = new Intent(this,SettingsActivity.class);
-        startActivity(intent);
-    }
+
 
     public void ShowPopup() {
         TextView txtclose;Button popUpIpGet;
