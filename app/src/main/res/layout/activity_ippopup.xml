@@ -49,12 +49,12 @@
             android:id="@+id/ipadress"
             android:textStyle="italic"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/LightBlack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="192.168.43.66"/>
+            android:hint="Type ip here"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="15dp"

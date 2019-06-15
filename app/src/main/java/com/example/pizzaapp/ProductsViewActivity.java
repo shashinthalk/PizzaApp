@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -50,13 +51,8 @@ public class ProductsViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         name = findViewById(R.id.text_view_login);
-        Intent intent = getIntent();
-        ip = intent.getStringExtra("ip");
-        String extraName = intent.getStringExtra("name");
         //PRODUCT_URL = intent.getStringExtra("sentURL");
-        name.setText("Hi " + extraName);
-        final String sts = intent.getStringExtra("sts");
-        sts_now = sts;
+        String url = "http://"+UserIdSession.getIpAdress()+":8080/system/findNameByUserId?id="+UserIdSession.getUsId()+"";
         productClassList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
@@ -103,7 +99,7 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://172.19.4.122:8080/system/getAllProducts",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -168,5 +164,34 @@ public class ProductsViewActivity extends AppCompatActivity {
     public void logout() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    public void getCustomerDetails(String link){
+        final String[] receivedData = new String[1];
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        name.setText("Hi " + response);
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ProductsViewActivity.this);
+                builder.setTitle("Warning!")
+                        .setMessage("Server connection error").setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ProductsViewActivity.super.onBackPressed();
+                            }
+                        }).create().show();
+
+            }
+        });
+        Volley.newRequestQueue(this).add(stringRequest);
+
     }
 }

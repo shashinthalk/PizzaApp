@@ -13,9 +13,12 @@
 <color name="Black">#000000</color>
 <color name="LightBlack">#A29999</color>
 <color name="white">#ffff</color>
-    <color name="bluelight">#00BCD4</color>
-    <color name="green">#23B129</color>
-    <color name="orange">#FF5722</color>
-
-
+<color name="bluelight">#00BCD4</color>
+<color name="green">#23B129</color>
+<color name="orange">#FF5722</color>
+    <color name="primary">#23A7D8</color>
+    <color name="accent">#FFFFF</color>
+    <color name="gradientStart">#19AA8B</color>
+    <color name="gradientEnd">#23A7D8</color>
+    <color name="transparent">#00000000</color>
 </resources>

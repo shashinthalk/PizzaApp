@@ -106,49 +106,63 @@ public class RegisterActivity extends AppCompatActivity {
                             if(mobile_number.length()==10){
                                 if(password.length()>5){
                                     if (password.equals(c_password)){
-                                        StringRequest stringRequest = new StringRequest(Request.Method.GET,"http://172.19.4.122:8080/system/addNewUser?name="+name+"&email="+email+"&mobile="+mobile_number+"&password="+password+"",
-                                                new Response.Listener<String>(){
+                                        if(email.indexOf('@')!=-1){
+                                            if(email.indexOf('.')!=-1){
+                                                StringRequest stringRequest = new StringRequest(Request.Method.GET,"http://"+UserIdSession.getIpAdress()+":8080/system/addNewUser?name="+name+"&email="+email+"&mobile="+mobile_number+"&password="+password+"",
+                                                        new Response.Listener<String>(){
+                                                            @Override
+                                                            public void onResponse(String response){
+                                                                if(response.equals("Successfully Registered")){
+                                                                    name_t.setText("");
+                                                                    email_t.setText("");
+                                                                    password_t.setText("");
+                                                                    c_password_t.setText("");
+                                                                    mobile_number_t.setText("");
+                                                                    loading.setVisibility(View.GONE);
+                                                                    btn_regist.setVisibility(View.VISIBLE);
+                                                                    Toast.makeText(RegisterActivity.this,response, Toast.LENGTH_SHORT).show();
+                                                                }else{
+                                                                    loading.setVisibility(View.GONE);
+                                                                    btn_regist.setVisibility(View.VISIBLE);
+                                                                    Toast.makeText(RegisterActivity.this,response, Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            }
+                                                        },
+                                                        new Response.ErrorListener(){
+                                                            @Override
+                                                            public void onErrorResponse(VolleyError error){
+                                                                Toast.makeText(RegisterActivity.this,"RegisterActivity Error!" + error.toString(), Toast.LENGTH_SHORT).show();
+                                                                loading.setVisibility(View.GONE);
+                                                                btn_regist.setVisibility(View.VISIBLE);
+                                                            }
+                                                        })
+                                                {
                                                     @Override
-                                                    public void onResponse(String response){
-                                                        if(response.equals("Successfully Registered")){
-                                                            name_t.setText("");
-                                                            email_t.setText("");
-                                                            password_t.setText("");
-                                                            c_password_t.setText("");
-                                                            mobile_number_t.setText("");
-                                                            loading.setVisibility(View.GONE);
-                                                            btn_regist.setVisibility(View.VISIBLE);
-                                                            Toast.makeText(RegisterActivity.this,response, Toast.LENGTH_SHORT).show();
-                                                        }else{
-                                                            loading.setVisibility(View.GONE);
-                                                            btn_regist.setVisibility(View.VISIBLE);
-                                                            Toast.makeText(RegisterActivity.this,response, Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                },
-                                                new Response.ErrorListener(){
-                                                    @Override
-                                                    public void onErrorResponse(VolleyError error){
-                                                        Toast.makeText(RegisterActivity.this,"RegisterActivity Error!" + error.toString(), Toast.LENGTH_SHORT).show();
-                                                        loading.setVisibility(View.GONE);
-                                                        btn_regist.setVisibility(View.VISIBLE);
-                                                    }
-                                                })
-                                        {
-                                            @Override
-                                            protected Map<String, String> getParams() throws AuthFailureError {
+                                                    protected Map<String, String> getParams() throws AuthFailureError {
 
-                                                Map<String, String> params = new HashMap<>();
-                                                params.put("name",name);
-                                                params.put("email",email);
-                                                params.put("password",password);
-                                                params.put("mobile_number" ,mobile_number);
-                                                return params;
+                                                        Map<String, String> params = new HashMap<>();
+                                                        params.put("name",name);
+                                                        params.put("email",email);
+                                                        params.put("password",password);
+                                                        params.put("mobile_number" ,mobile_number);
+                                                        return params;
+                                                    }
+                                                };
+
+                                                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                                                requestQueue.add(stringRequest);
+                                            }else{
+                                                Toast.makeText(getApplicationContext(),"Wrong email",Toast.LENGTH_SHORT).show();
+                                                email_t.setText("");
+                                                loading.setVisibility(View.GONE);
+                                                btn_regist.setVisibility(View.VISIBLE);
                                             }
-                                        };
-
-                                        RequestQueue requestQueue = Volley.newRequestQueue(this);
-                                        requestQueue.add(stringRequest);
+                                        }else{
+                                            Toast.makeText(getApplicationContext(),"Wrong email",Toast.LENGTH_SHORT).show();
+                                            email_t.setText("");
+                                            loading.setVisibility(View.GONE);
+                                            btn_regist.setVisibility(View.VISIBLE);
+                                        }
 
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Password and Confirmation Password does not match",Toast.LENGTH_SHORT).show();

@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+    Button button;
     Dialog myDialog;
     private static String ip = "";
     private static String sts_now ="";
@@ -193,10 +194,18 @@ public class LoginActivity extends AppCompatActivity {
                     String mPassword = password.getText().toString().trim();
 
                     if(!mEmail.isEmpty()){
-                        if(!mPassword.isEmpty()){
-                            login(mEmail,mPassword);
+                        if(mEmail.indexOf('@')!=-1){
+                            if(mEmail.indexOf('.')!=-1){
+                                if(!mPassword.isEmpty()){
+                                    login(mEmail,mPassword);
+                                }else{
+                                    password.setError("Please insert Password");
+                                }
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Email is incorrect",Toast.LENGTH_SHORT).show();
+                            }
                         }else{
-                            password.setError("Please insert Password");
+                            Toast.makeText(getApplicationContext(),"Email is incorrect",Toast.LENGTH_SHORT).show();
                         }
                     }else{
                         email.setError("Please insert email");
@@ -256,10 +265,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         if(!URL.equals("")){
-
-
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://172.19.4.122:8080/system/loginUser?email="+email+"&password="+password+"",
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/loginUser?email="+email+"&password="+password+"",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -273,7 +279,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
                             }else if(!res.equals("")){
                                 Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
-                                openProducts(res,sentURL);
+                                openProducts();
+                                UserIdSession.setUsId(res);
                                 loading.setVisibility(View.GONE);
                                 button2.setVisibility(View.VISIBLE);
                             }else{
@@ -384,12 +391,8 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openProducts(String name, String sentURL){
+    public void openProducts(){
         Intent intent = new Intent(this, ProductsViewActivity.class);
-        intent.putExtra("sentURL", sentURL);
-        intent.putExtra("name", name);
-        intent.putExtra("sts", sts_now);
-        intent.putExtra("ip", ip);
         startActivity(intent);
         email.setText("");
         password.setText("");
@@ -407,19 +410,32 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ShowPopup() {
-        TextView txtclose;
-        Button btnFollow;
+        TextView txtclose;Button popUpIpGet;
+        final EditText ipAddressGet;
         myDialog.setContentView(R.layout.activity_ippopup);
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
-        //btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        popUpIpGet = myDialog.findViewById(R.id.getIpAdrss);
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myDialog.dismiss();
             }
         });
+
+        ipAddressGet = myDialog.findViewById(R.id.ipadress);
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+
+        popUpIpGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserIdSession.setIpAdress(String.valueOf(ipAddressGet.getText()));
+                if(UserIdSession.getIpAdress().equals(String.valueOf(ipAddressGet.getText()))){
+                    Toast.makeText(LoginActivity.this,"Ip successfully added!",Toast.LENGTH_SHORT).show();
+                }
+                myDialog.dismiss();
+            }
+        });
     }
 }
