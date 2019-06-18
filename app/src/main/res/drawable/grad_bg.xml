@@ -4,5 +4,5 @@
         andriod:angle="0"
         andriod:endColor="@color/gradientEnd"
         andriod:startColor="@color/gradientStart"
-        andriod:type="linear"
+        andriod:type="linear"/>
 </shape>

@@ -287,7 +287,7 @@ public class SingleViewActivity extends AppCompatActivity {
     }
 
     public void checkoutOpen(){
-        Intent intent = new Intent(this, CheckoutActivity.class);
+        Intent intent = new Intent(this, CartViewActivity.class);
         intent.putExtra("checkout_item_prices", checkout_item_prices_send);
         intent.putExtra("checkout_item_names", checkout_item_names_send);
         intent.putExtra("checkout_item_count", checkout_item_count);

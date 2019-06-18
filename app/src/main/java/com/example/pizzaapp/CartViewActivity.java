@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class CheckoutActivity extends AppCompatActivity {
+public class CartViewActivity extends AppCompatActivity {
     private static int count = 0;
     private static String sts_now ="";
     TextView tv_details01,tv_details02,tv_details03,tv_details04,tv_details05,tv_amount1,tv_amount2,tv_amount3,tv_amount4,tv_amount5,tv_Total_amount;
@@ -110,7 +110,7 @@ public class CheckoutActivity extends AppCompatActivity {
                                 pr4 = checkout_item_prices_received.get(3);
                                 pr5 = checkout_item_prices_received.get(4);
                             } else {
-                                Toast.makeText(CheckoutActivity.this, "error!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CartViewActivity.this, "error!", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             //four items
@@ -196,7 +196,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 pr1 = checkout_item_prices_received.get(0);
             }
         }else{
-            Toast.makeText(CheckoutActivity.this,"No Items!" ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(CartViewActivity.this,"No Items!" ,Toast.LENGTH_SHORT).show();
         }
 
         double  prices;

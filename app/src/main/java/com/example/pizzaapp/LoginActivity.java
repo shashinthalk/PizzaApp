@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,169 +21,34 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    Button button;
     Dialog myDialog;
-    private static String ip = "";
-    private static String sts_now ="";
     private EditText email, password;
     private ProgressBar loading;
-    //private static String URL_LOGIN = "http://192.168.43.66/login.php";
-    //private static final String URL_LOGIN = "";
-    CheckBox localServer, onlineServer;
     private static String sentURL="";
-    private Button button1,button2,btn_after;
+    private Button signUpButton,loginButton;
     Connection_Detector connection_detector;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         myDialog = new Dialog(this);
         connection_detector=new Connection_Detector(this);
-        localServer = findViewById(R.id.localServer);
-        onlineServer = findViewById(R.id.OnlineServer);
         loading = findViewById(R.id.log_loading);
         email = findViewById(R.id.log_email);
         password = findViewById(R.id.log_password);
-        btn_after.setVisibility(View.GONE);
-        Intent intent = getIntent();
         ShowPopup();
-        ip = intent.getStringExtra("ip");
         if (connection_detector.isConnected())
         {
         }else
         {
             connectionStatus();
         }
-
-        try
-        {
-
-            final String sts = intent.getStringExtra("sts");
-            if(sts=="1"){
-                sts_now="0";
-                Toast.makeText(getApplicationContext(),"1",Toast.LENGTH_SHORT).show();
-            }else if(sts=="0"){
-                sts_now="1";
-                Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_SHORT).show();
-            }else{
-                sts_now="1";
-                //Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_SHORT).show();
-            }
-
-        }
-        catch(Exception e)
-        {
-            sts_now="1";
-            Toast.makeText(getApplicationContext(),"0",Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-        button1 = findViewById(R.id.btn_win_regist);
-        btn_after.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (connection_detector.isConnected())
-                {
-                    String URL = "";
-                    int local = 0;
-                    int online = 0;
-                    if(localServer.isChecked() || onlineServer.isChecked()){
-                        if(localServer.isChecked()){
-                            local =1;
-                        }
-                        if(onlineServer.isChecked()){
-                            online = 1;
-                        }
-                    }
-
-                    if(local ==1){
-                        if(online ==1){
-                            Toast.makeText(getApplicationContext(),"Please check one server",Toast.LENGTH_SHORT).show();
-                        }else{
-                            //local
-                            URL = "http://192.168.43.66/register.php";
-                            Toast.makeText(getApplicationContext(),"local server selected",Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-                        if(online ==1){
-                            //online
-                            URL = "http://msrpromotion.lk/pizza.lk/register.php";
-                            Toast.makeText(getApplicationContext(),"online server selected",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Please select server",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    if(!URL.equals("")){
-                        openRegister(URL);
-                    }
-
-                }else
-                {
-                    connectionStatus();
-                }
-
-            }
-        });
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (connection_detector.isConnected())
-                {
-                    String URL = "";
-                    int local = 0;
-                    int online = 0;
-                    if(localServer.isChecked() || onlineServer.isChecked()){
-                        if(localServer.isChecked()){
-                            local =1;
-                        }
-                        if(onlineServer.isChecked()){
-                            online = 1;
-                        }
-                    }
-
-                    if(local ==1){
-                        if(online ==1){
-                            Toast.makeText(getApplicationContext(),"Please check one server",Toast.LENGTH_SHORT).show();
-                        }else{
-                            //local
-                            URL = "http://192.168.43.66/register.php";
-                            Toast.makeText(getApplicationContext(),"local server selected",Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-                        if(online ==1){
-                            //online
-                            URL = "http://msrpromotion.lk/pizza.lk/register.php";
-                            Toast.makeText(getApplicationContext(),"online server selected",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Please select server",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    if(!URL.equals("")){
-                        openRegister(URL);
-                    }
-
-                }else
-                {
-                    connectionStatus();
-                }
-
-            }
-        });
-
-        button2 = findViewById(R.id.btn_products);
-        button2.setOnClickListener(new View.OnClickListener() {
+        loginButton = findViewById(R.id.btn_products);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (connection_detector.isConnected())
@@ -196,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(mEmail.indexOf('@')!=-1){
                             if(mEmail.indexOf('.')!=-1){
                                 if(!mPassword.isEmpty()){
-                                    login(mEmail,mPassword);
+                                    loginFuncton(mEmail,mPassword);
                                 }else{
                                     password.setError("Please insert Password");
                                 }
@@ -222,48 +86,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login(final String email, final String password){
+    private void loginFuncton(final String email, final String password){
         loading.setVisibility(View.VISIBLE);
-        button2.setVisibility(View.GONE);
+        loginButton.setVisibility(View.GONE);
 
-        String URL = "";
-        int local = 0;
-        int online = 0;
-        if(localServer.isChecked() || onlineServer.isChecked()){
-            if(localServer.isChecked()){
-                local =1;
-            }
-            if(onlineServer.isChecked()){
-                online = 1;
-            }
-        }
-
-        if(local ==1){
-            if(online ==1){
-                Toast.makeText(getApplicationContext(),"Please check one server",Toast.LENGTH_SHORT).show();
-                loading.setVisibility(View.GONE);
-                button2.setVisibility(View.VISIBLE);
-            }else{
-                //local
-                URL = "http://192.168.43.66/login.php";
-                sentURL = "http://192.168.43.66:8080/demo/all";
-                //Toast.makeText(getApplicationContext(),"local server selected",Toast.LENGTH_SHORT).show();
-
-            }
-        }else{
-            if(online ==1){
-                //online
-                URL = "http://msrpromotion.lk/pizza.lk/login.php";
-                sentURL = "http://192.168.43.66:8080/demo/all";
-                //Toast.makeText(getApplicationContext(),"online server selected",Toast.LENGTH_SHORT).show();
-
-            }else{
-                Toast.makeText(getApplicationContext(),"Please select server",Toast.LENGTH_SHORT).show();
-                loading.setVisibility(View.GONE);
-                button2.setVisibility(View.VISIBLE);
-            }
-        }
-        if(!URL.equals("")){
             StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/loginUser?email="+email+"&password="+password+"",
                     new Response.Listener<String>() {
                         @Override
@@ -271,53 +97,20 @@ public class LoginActivity extends AppCompatActivity {
                             String res = response;
                             if(res.equals("Email is incorrect")||res.equals("Password is incorrect")){
                                 loading.setVisibility(View.GONE);
-                                button2.setVisibility(View.VISIBLE);
-                                btn_after.setVisibility(View.VISIBLE);
-                                button1.setVisibility(View.GONE);
-                                btn_after.setError("RegisterActivity first");
+                                loginButton.setVisibility(View.VISIBLE);
                                 Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
                             }else if(!res.equals("")){
                                 Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
-                                openProducts();
+                                openProductActivity();
                                 UserIdSession.setUsId(res);
                                 loading.setVisibility(View.GONE);
-                                button2.setVisibility(View.VISIBLE);
+                                loginButton.setVisibility(View.VISIBLE);
                             }else{
                                 loading.setVisibility(View.GONE);
-                                button2.setVisibility(View.VISIBLE);
-                                btn_after.setVisibility(View.VISIBLE);
-                                button1.setVisibility(View.GONE);
-                                btn_after.setError("RegisterActivity first");
+                                loginButton.setVisibility(View.VISIBLE);
                                 Toast.makeText(LoginActivity.this,"User name or Password is incorrect!" ,Toast.LENGTH_SHORT).show();
                             }
-                            /*try {
-                                JSONArray Products = new JSONArray(response);
 
-                                for (int i=0; i<Products.length(); i++){
-                                    JSONObject productObject = Products.getJSONObject(i);
-                                    String status = productObject.getString("status");
-                                    String name = productObject.getString("name");
-
-                                    if(status.equals("OK")){
-                                        openProducts(name,sentURL);
-                                        loading.setVisibility(View.GONE);
-                                        button2.setVisibility(View.VISIBLE);
-                                    }else{
-                                        loading.setVisibility(View.GONE);
-                                        button2.setVisibility(View.VISIBLE);
-                                        btn_after.setVisibility(View.VISIBLE);
-                                        button1.setVisibility(View.GONE);
-                                        btn_after.setError("RegisterActivity first");
-                                        Toast.makeText(LoginActivity.this,"User name or Password is incorrect!" ,Toast.LENGTH_SHORT).show();
-                                    }
-
-
-                                }
-
-                            } catch (JSONException e) {
-                                Toast.makeText(LoginActivity.this,response,Toast.LENGTH_SHORT).show();
-                                e.printStackTrace();
-                            }*/
                         }
                     },
                     new Response.ErrorListener() {
@@ -325,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(LoginActivity.this,"Sever not-respond!",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
-                            button2.setVisibility(View.VISIBLE);
+                            loginButton.setVisibility(View.VISIBLE);
                         }
                     })
             {
@@ -343,11 +136,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         }
-
-
-    }
-
-
 
     @Override
     public void onBackPressed() {
@@ -380,17 +168,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void openRegister(String url){
+    public void openSigninActivity(String url){
         Intent intent = new Intent(this, RegisterActivity.class);
         email.setText("");
         password.setText("");
-        btn_after.setVisibility(View.GONE);
-        button1.setVisibility(View.VISIBLE);
         intent.putExtra("url", url);
         startActivity(intent);
     }
 
-    public void openProducts(){
+    public void openProductActivity(){
         Intent intent = new Intent(this, ProductsViewActivity.class);
         startActivity(intent);
         email.setText("");
