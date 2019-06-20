@@ -51,14 +51,31 @@
 
     </TableLayout>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_below="@+id/table1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:id="@+id/layoutOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/layoutOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+
 
 
 </RelativeLayout>

@@ -34,29 +34,37 @@ import java.util.List;
 
 public class ProductsViewActivity extends AppCompatActivity {
     private static String sts_now = "";
-    private static String ip = "";
-    RecyclerView recyclerView;
+    RecyclerView recyclerView01,recyclerView02;
     ProductAdapter adapter;
+    HotProductAdapter hotAdapter;
     List<ProductClass> productClassList;
+    List<HotProductsClass>hotProductClassList;
     private Button button;
     private Button button_logout;
     private TextView name;
-
+    private static String ip = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         name = findViewById(R.id.text_view_login);
         //PRODUCT_URL = intent.getStringExtra("sentURL");
-        String url = "http://" + UserIdSession.getIpAdress() + ":8080/system/findNameByUserId?id=" + UserIdSession.getUsId() + "";
+        String url = "http://"+UserIdSession.getIpAdress()+":8080/system/findNameByUserId?id="+UserIdSession.getUsId()+"";
         productClassList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.recycleView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        hotProductClassList = new ArrayList<>();
+        recyclerView01 = (RecyclerView) findViewById(R.id.recycleView01);
+        recyclerView02 = (RecyclerView) findViewById(R.id.recycleView02);
+        recyclerView01.setHasFixedSize(true);
+        recyclerView02.setHasFixedSize(true);
+        recyclerView01.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView02.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView01.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         loadProducts();
+        loadHotProducts();
         adapter = new ProductAdapter(this, productClassList);
-        recyclerView.setAdapter(adapter);
+        hotAdapter = new HotProductAdapter(this, hotProductClassList);
+        recyclerView01.setAdapter(adapter);
+        recyclerView02.setAdapter(hotAdapter);
         button_logout = findViewById(R.id.btn_logout);
 
         button_logout.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +104,7 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://" + UserIdSession.getIpAdress() + ":8080/system/getAllProducts",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -116,7 +124,51 @@ public class ProductsViewActivity extends AppCompatActivity {
                                 productClassList.add(ProductClass);
                             }
                             adapter = new ProductAdapter(ProductsViewActivity.this, productClassList);
-                            recyclerView.setAdapter(adapter);
+                            recyclerView01.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ProductsViewActivity.this);
+                builder.setTitle("Warning!")
+                        .setMessage("Server connection error").setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ProductsViewActivity.super.onBackPressed();
+                            }
+                        }).create().show();
+
+            }
+        });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void loadHotProducts() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/getAllProducts",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray products = new JSONArray(response);
+                            for (int i = 0; i < products.length(); i++) {
+                                JSONObject productObject = products.getJSONObject(i);
+
+                                int id = productObject.getInt("id");
+                                String title = productObject.getString("title");
+                                String shortDescription = productObject.getString("shortdesc");
+                                double price = productObject.getDouble("price");
+                                double rating = productObject.getDouble("rating");
+                                String image = productObject.getString("image");
+                                String status = productObject.getString("status");
+                                HotProductsClass hotProductsClass = new HotProductsClass(id, title, shortDescription, rating, price, image, status, sts_now);
+                                hotProductClassList.add(hotProductsClass);
+                            }
+                            hotAdapter = new HotProductAdapter(ProductsViewActivity.this, hotProductClassList);
+                            recyclerView02.setAdapter(hotAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -163,14 +215,14 @@ public class ProductsViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getCustomerDetails(String link) {
+    public void getCustomerDetails(String link){
         final String[] receivedData = new String[1];
         StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         name.setText("Hi " + response);
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
                     }
                 }, new Response.ErrorListener() {

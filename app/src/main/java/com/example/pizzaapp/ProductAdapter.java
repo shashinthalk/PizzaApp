@@ -18,7 +18,6 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
 
-    private static String sts_now ="";
     private static double DouPrice = 0;
     private Context mCtx;
     private List<ProductClass> productClassList;
@@ -29,10 +28,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     @Override
-    public ProductViewHolder onCreateViewHolder( ViewGroup viewGroup, int i) {
+    public ProductViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.list_layout, null);
-        return  new ProductViewHolder(view);
+        return new ProductViewHolder(view);
 
     }
 
@@ -42,24 +41,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         final ProductClass ProductClass = productClassList.get(position);
 
         //productViewHolder.textViewDesc.setText(ProductClass.getTitle());
-        productViewHolder.textViewTitle.setText(ProductClass.getShortdesc());
-        productViewHolder.textViewPrice.setText(String.valueOf(ProductClass.getPrice()));
-        productViewHolder.textViewRating.setText(String.valueOf(ProductClass.getRating()));
+        //productViewHolder.textViewTitle.setText(ProductClass.getShortdesc());
+        productViewHolder.textViewTitle.setText("");
+        //productViewHolder.textViewPrice.setText(String.valueOf(ProductClass.getPrice()));
+        productViewHolder.textViewPrice.setText("");
+        //productViewHolder.textViewRating.setText(String.valueOf(ProductClass.getRating()));
+        productViewHolder.textViewRating.setText("");
         productViewHolder.textViewstatus.setText(ProductClass.getStatus());
-        sts_now = ProductClass.getSts_now();
+        productViewHolder.textViewstatus.setText("");
         productViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mCtx, SingleViewActivity.class);
-                intent.putExtra("title", ProductClass.getTitle() );
-                intent.putExtra("description", ProductClass.getShortdesc() );
-                intent.putExtra("rating", String.valueOf(ProductClass.getRating()) );
-                intent.putExtra("status", ProductClass.getStatus() );
-                intent.putExtra("image", ProductClass.getImage() );
-                intent.putExtra("price", String.valueOf(ProductClass.getPrice()) );
-                intent.putExtra("sts", sts_now );
+                intent.putExtra("title", ProductClass.getTitle());
+                intent.putExtra("description", ProductClass.getShortdesc());
+                intent.putExtra("rating", String.valueOf(ProductClass.getRating()));
+                intent.putExtra("status", ProductClass.getStatus());
+                intent.putExtra("image", ProductClass.getImage());
+                intent.putExtra("price", String.valueOf(ProductClass.getPrice()));
                 DouPrice = ProductClass.getPrice();
-                intent.putExtra("DouPrice", DouPrice );
+                intent.putExtra("DouPrice", DouPrice);
                 mCtx.startActivity(intent);
             }
         });
@@ -76,10 +77,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productClassList.size();
     }
 
-    class ProductViewHolder extends RecyclerView.ViewHolder{
+    class ProductViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView textViewTitle, textViewDesc, textViewRating, textViewPrice ,textViewstatus;
+        TextView textViewTitle, textViewDesc, textViewRating, textViewPrice, textViewstatus;
         RelativeLayout relativeLayout;
 
         public ProductViewHolder(View itemView) {

@@ -24,8 +24,7 @@
                 android:id="@+id/relative"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/layout_rounded_coners"
-                android:backgroundTint="@color/gradientStart"
+                android:background="@color/colorlayooutback"
 
                 android:padding="8dp">
 
