@@ -50,10 +50,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         productViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
                 Intent intent = new Intent(mCtx, SingleViewActivity.class);
                 intent.putExtra("title", ProductClass.getTitle() );
                 intent.putExtra("description", ProductClass.getShortdesc() );
@@ -64,7 +60,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 intent.putExtra("sts", sts_now );
                 DouPrice = ProductClass.getPrice();
                 intent.putExtra("DouPrice", DouPrice );
-
                 mCtx.startActivity(intent);
             }
         });

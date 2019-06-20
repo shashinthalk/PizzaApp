@@ -2,7 +2,7 @@
     andriod:shape="rectangle">
     <gradient
         andriod:angle="0"
-        andriod:endColor="@color/gradientEnd"
+        andriod:endColor="@color/gradientCenter"
         andriod:startColor="@color/gradientStart"
         andriod:type="linear"/>
 </shape>

@@ -1,14 +1,18 @@
 package com.example.pizzaapp;
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,19 +30,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    Dialog myDialog;
     private EditText name_t , email_t , password_t , c_password_t ,mobile_number_t;
-    private Button btn_regist;
+    private Button btn_regist,signin,btnSettings;
     private ProgressBar loading;
-    //private static String URL_REGIST="http://192.168.43.66/register.php";
-    //private static String URL_REGIST="";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        btnSettings = findViewById(R.id.btnSettings);
+        signin = findViewById(R.id.signin);
         loading = findViewById(R.id.loading);
         name_t = findViewById(R.id.name);
         email_t = findViewById(R.id.email);
@@ -46,18 +49,24 @@ public class RegisterActivity extends AppCompatActivity {
         c_password_t = findViewById(R.id.c_password);
         btn_regist = findViewById(R.id.btn_regist);
         mobile_number_t = findViewById(R.id.mobile);
-        Intent intent = getIntent();
-        //URL_REGIST = intent.getStringExtra("url");
-
         btn_regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Regist();
             }
         });
-
-
-
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLoginActivity();
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettingPopup();
+            }
+        });
     }
 
 
@@ -210,5 +219,40 @@ public class RegisterActivity extends AppCompatActivity {
             loading.setVisibility(View.GONE);
             btn_regist.setVisibility(View.VISIBLE);
         }
+    }
+    public void openSettingPopup() {
+
+        TextView txtclose;Button popUpIpGet;
+        final EditText ipAddressGet;
+        myDialog.setContentView(R.layout.settings_popup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+        popUpIpGet = myDialog.findViewById(R.id.getIpAdrss);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        ipAddressGet = myDialog.findViewById(R.id.ipadress);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+
+        popUpIpGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserIdSession.setIpAdress(String.valueOf(ipAddressGet.getText()));
+                if(UserIdSession.getIpAdress().equals(String.valueOf(ipAddressGet.getText()))){
+                    Toast.makeText(RegisterActivity.this,"Ip successfully added!",Toast.LENGTH_SHORT).show();
+                }
+                myDialog.dismiss();
+            }
+        });
+
+    }
+    public void openLoginActivity() {
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
     }
 }

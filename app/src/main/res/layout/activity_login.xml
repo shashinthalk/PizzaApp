@@ -9,21 +9,29 @@
     tools:context=".LoginActivity">
 
     <ScrollView
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
+            <Button
+                android:onClick="openSettingsPopup"
+                android:layout_margin="10dp"
+                android:background="@mipmap/settings_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"/>
+
             <ImageView
                 android:id="@+id/img_logo"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@mipmap/logo"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>
@@ -145,17 +153,18 @@
                 </LinearLayout>
             </RelativeLayout>
             <LinearLayout
-                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:layout_below="@+id/layout_01"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:onClick="openRegistrationActivity"
                     android:background="@color/transparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Signup"
+                    android:text="Create Account!"
                     android:textColor="@color/white"/>
             </LinearLayout>
 

@@ -33,30 +33,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsViewActivity extends AppCompatActivity {
-    //private static String PRODUCT_URL="http://msrpromotion.lk/pizza.lk/api.php";
-    //private static String PRODUCT_URL="http://192.168.43.66/api.php";
-    //private static final String PRODUCT_URL = ;
     private static String sts_now = "";
-    //private static String PRODUCT_URL = "";
-    //SwipeRefreshLayout swipe;
+    private static String ip = "";
     RecyclerView recyclerView;
     ProductAdapter adapter;
     List<ProductClass> productClassList;
     private Button button;
     private Button button_logout;
     private TextView name;
-    private static String ip = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         name = findViewById(R.id.text_view_login);
         //PRODUCT_URL = intent.getStringExtra("sentURL");
-        String url = "http://"+UserIdSession.getIpAdress()+":8080/system/findNameByUserId?id="+UserIdSession.getUsId()+"";
+        String url = "http://" + UserIdSession.getIpAdress() + ":8080/system/findNameByUserId?id=" + UserIdSession.getUsId() + "";
         productClassList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         loadProducts();
         adapter = new ProductAdapter(this, productClassList);
         recyclerView.setAdapter(adapter);
@@ -99,7 +96,7 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/getAllProducts",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://" + UserIdSession.getIpAdress() + ":8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -166,14 +163,14 @@ public class ProductsViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getCustomerDetails(String link){
+    public void getCustomerDetails(String link) {
         final String[] receivedData = new String[1];
         StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         name.setText("Hi " + response);
-                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
 
                     }
                 }, new Response.ErrorListener() {

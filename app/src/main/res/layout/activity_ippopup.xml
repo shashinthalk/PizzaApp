@@ -1,34 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:backgroundTint="@color/colorPrimary2"
-    android:layout_width="250dp"
-    android:layout_height="300dp"
+    android:backgroundTint="@color/gradientStart"
+    android:backgroundTintMode="src_atop"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/layout_rounded_coners"
     android:padding="10dp"
-    android:layout_gravity="center">
+    android:layout_margin="50dp"
+    android:layout_gravity="center_horizontal">
     <TextView
         android:id="@+id/txtclose"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:textColor="@color/colorstasus"
-        android:text="X"
+        android:background="@mipmap/remove"
         android:textStyle="bold"
         android:layout_gravity="end"
         android:gravity="center"/>
 
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set your Ip-address"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/input_ip_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:padding="8dp"
+            android:background="@drawable/edit_text_background"
+            android:textSize="15dp"
+            android:id="@+id/ipadress"
+            android:textStyle="italic"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="Type ip here"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:src="@mipmap/logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
-        
+
+
         <Button
+            android:layout_gravity="end"
+            android:textSize="10dp"
             android:id="@+id/getIpAdrss"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
@@ -36,36 +70,19 @@
             android:layout_marginLeft="30dp"
             android:textStyle="italic"
             android:text="Set Ip"
-            android:background="@drawable/mybutton"/>
-        
+            android:background="@drawable/btn_background"/>
+
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/ipadress"
-            android:textStyle="italic"
-            android:textColor="@color/white"
-            android:textColorHint="@color/LightBlack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="Type ip here"/>
-    </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="match_parent"
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/advertisement"/>
+            android:src="@mipmap/pizzaadvertisement"/>
 
     </LinearLayout>
 

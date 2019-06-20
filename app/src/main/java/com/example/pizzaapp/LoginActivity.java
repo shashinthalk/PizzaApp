@@ -220,4 +220,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void openSettingsPopup(View view) {
+
+        myDialog.setContentView(R.layout.settings_popup);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+
+
+
+    }
+
+    public void openRegistrationActivity(View view) {
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
+
 }
