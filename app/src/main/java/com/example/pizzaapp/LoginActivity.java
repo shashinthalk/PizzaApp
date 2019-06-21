@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         loading = findViewById(R.id.log_loading);
         email = findViewById(R.id.log_email);
         password = findViewById(R.id.log_password);
-        ShowPopup();
         if (connection_detector.isConnected())
         {
         }else
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                                 loginButton.setVisibility(View.VISIBLE);
                                 Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
                             }else if(!res.equals("")){
-                                Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginActivity.this,res,Toast.LENGTH_SHORT).show();
                                 openProductActivity();
                                 UserIdSession.setUsId(res);
                                 loading.setVisibility(View.GONE);
@@ -221,13 +219,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void openSettingsPopup(View view) {
-
-        myDialog.setContentView(R.layout.settings_popup);
+    public void OpenSettings(View view) {
+        Button btn_settings;
+        myDialog.setContentView(R.layout.settings_popup_for_before_login);
+        btn_settings = myDialog.findViewById(R.id.settings_btn);
+        btn_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPopup();
+            }
+        });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
-
-
 
     }
 

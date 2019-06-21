@@ -1,20 +1,24 @@
 package com.example.pizzaapp;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,22 +38,20 @@ import java.util.List;
 
 public class ProductsViewActivity extends AppCompatActivity {
     private static String sts_now = "";
-    RecyclerView recyclerView01,recyclerView02;
+    Dialog myDialog;
+    RecyclerView recyclerView01, recyclerView02;
     ProductAdapter adapter;
     HotProductAdapter hotAdapter;
     List<ProductClass> productClassList;
-    List<HotProductsClass>hotProductClassList;
-    private Button button;
-    private Button button_logout;
+    List<HotProductsClass> hotProductClassList;
+    Button openSettingsPopup;
     private TextView name;
-    private static String ip = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         name = findViewById(R.id.text_view_login);
-        //PRODUCT_URL = intent.getStringExtra("sentURL");
-        String url = "http://"+UserIdSession.getIpAdress()+":8080/system/findNameByUserId?id="+UserIdSession.getUsId()+"";
         productClassList = new ArrayList<>();
         hotProductClassList = new ArrayList<>();
         recyclerView01 = (RecyclerView) findViewById(R.id.recycleView01);
@@ -61,38 +63,41 @@ public class ProductsViewActivity extends AppCompatActivity {
         recyclerView01.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         loadProducts();
         loadHotProducts();
-        adapter = new ProductAdapter(this, productClassList);
-        hotAdapter = new HotProductAdapter(this, hotProductClassList);
-        recyclerView01.setAdapter(adapter);
-        recyclerView02.setAdapter(hotAdapter);
-        button_logout = findViewById(R.id.btn_logout);
-
-        button_logout.setOnClickListener(new View.OnClickListener() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://" + UserIdSession.getIpAdress() + ":8080/system/findByUserId?id="+Integer.parseInt(UserIdSession.getUsId())+"",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        name.setText("Hi "+response);
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            public void onClick(View v) {
+            public void onErrorResponse(VolleyError error) {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ProductsViewActivity.this);
                 builder.setTitle("Warning!")
-                        .setMessage("Do you want logout now ?").setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setMessage("Server connection error").setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                logout();
-                            }
-                        })
-
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
+                                ProductsViewActivity.super.onBackPressed();
                             }
                         }).create().show();
 
             }
         });
+        Volley.newRequestQueue(this).add(stringRequest);
+        adapter = new ProductAdapter(this, productClassList);
+        hotAdapter = new HotProductAdapter(this, hotProductClassList);
+        recyclerView01.setAdapter(adapter);
+        recyclerView02.setAdapter(hotAdapter);
+        openSettingsPopup = findViewById(R.id.btn_open_settings);
+        openSettingsPopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "This button have some error.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-
-        ImageView mimageView = (ImageView) findViewById(R.id.image_view);
-
+        /*ImageView mimageView = (ImageView) findViewById(R.id.image_view);
         Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.addvertiestment)).getBitmap();
         Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
         Canvas canvas = new Canvas(imageRounded);
@@ -100,11 +105,12 @@ public class ProductsViewActivity extends AppCompatActivity {
         mpaint.setAntiAlias(true);
         mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
         canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
-        mimageView.setImageBitmap(imageRounded);
+        mimageView.setImageBitmap(imageRounded);*/
     }
 
+
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/getAllProducts",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://" + UserIdSession.getIpAdress() + ":8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -148,7 +154,7 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
     private void loadHotProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://"+UserIdSession.getIpAdress()+":8080/system/getAllProducts",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://" + UserIdSession.getIpAdress() + ":8080/system/getAllProducts",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -215,32 +221,41 @@ public class ProductsViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getCustomerDetails(String link){
-        final String[] receivedData = new String[1];
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        name.setText("Hi " + response);
-                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
 
-                    }
-                }, new Response.ErrorListener() {
+    //floating button error.
+    /*public void openSettingsPopup() {
+        myDialog.setContentView(R.layout.activity_ippopup);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void ShowPopup() {
+        TextView txtclose;Button popUpIpGet;
+        final EditText ipAddressGet;
+        myDialog.setContentView(R.layout.activity_ippopup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("X");
+        popUpIpGet = myDialog.findViewById(R.id.getIpAdrss);
+        txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ProductsViewActivity.this);
-                builder.setTitle("Warning!")
-                        .setMessage("Server connection error").setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ProductsViewActivity.super.onBackPressed();
-                            }
-                        }).create().show();
-
+            public void onClick(View v) {
+                myDialog.dismiss();
             }
         });
-        Volley.newRequestQueue(this).add(stringRequest);
 
-    }
+        ipAddressGet = myDialog.findViewById(R.id.ipadress);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+
+        popUpIpGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserIdSession.setIpAdress(String.valueOf(ipAddressGet.getText()));
+                if(UserIdSession.getIpAdress().equals(String.valueOf(ipAddressGet.getText()))){
+                    Toast.makeText(ProductsViewActivity.this,"Ip successfully added!",Toast.LENGTH_SHORT).show();
+                }
+                myDialog.dismiss();
+            }
+        });
+    }*/
 }

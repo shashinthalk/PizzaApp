@@ -23,9 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -224,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         TextView txtclose;Button popUpIpGet;
         final EditText ipAddressGet;
-        myDialog.setContentView(R.layout.settings_popup);
+        myDialog.setContentView(R.layout.settings_popup_for_after_login);
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
         popUpIpGet = myDialog.findViewById(R.id.getIpAdrss);

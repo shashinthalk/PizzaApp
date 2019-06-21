@@ -41,14 +41,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         final ProductClass ProductClass = productClassList.get(position);
 
         //productViewHolder.textViewDesc.setText(ProductClass.getTitle());
-        //productViewHolder.textViewTitle.setText(ProductClass.getShortdesc());
-        productViewHolder.textViewTitle.setText("");
-        //productViewHolder.textViewPrice.setText(String.valueOf(ProductClass.getPrice()));
-        productViewHolder.textViewPrice.setText("");
-        //productViewHolder.textViewRating.setText(String.valueOf(ProductClass.getRating()));
-        productViewHolder.textViewRating.setText("");
+        productViewHolder.textViewTitle.setText(ProductClass.getShortdesc());
+        productViewHolder.textViewPrice.setText(String.valueOf(ProductClass.getPrice()));
+        productViewHolder.textViewRating.setText(String.valueOf(ProductClass.getRating()));
         productViewHolder.textViewstatus.setText(ProductClass.getStatus());
-        productViewHolder.textViewstatus.setText("");
         productViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

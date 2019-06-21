@@ -3,6 +3,16 @@ package com.example.pizzaapp;
 public class UserIdSession {
 
     private static String usId;
+    private static String userName;
+    private static String ipAdress;
+
+    public static String getUserName() {
+        return userName;
+    }
+
+    public static void setUserName(String userName) {
+        UserIdSession.userName = userName;
+    }
 
     public static String getIpAdress() {
         return ipAdress;
@@ -12,7 +22,7 @@ public class UserIdSession {
         UserIdSession.ipAdress = ipAdress;
     }
 
-    private static String ipAdress;
+
 
     public static String getUsId() {
         return usId;

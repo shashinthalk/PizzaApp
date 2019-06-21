@@ -20,14 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
-            <Button
-                android:onClick="openSettingsPopup"
-                android:layout_margin="10dp"
-                android:background="@mipmap/settings_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"/>
-
             <ImageView
                 android:id="@+id/img_logo"
                 android:layout_width="100dp"
@@ -176,7 +168,16 @@
 
     </ScrollView>
 
-
+    <Button
+        android:onClick="OpenSettings"
+        android:id="@+id/btn_logout"
+        android:background="@mipmap/option_button_icon"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 
 </RelativeLayout>

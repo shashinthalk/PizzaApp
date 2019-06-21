@@ -37,7 +37,7 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.Ho
 
         final HotProductsClass HotProductClass = hotProductsClassList.get(position);
 
-        //hotProductViewHolder.textViewDesc.setText(HotProductClass.getTitle());
+        hotProductViewHolder.textViewDesc.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ");
         hotProductViewHolder.textViewTitle.setText(HotProductClass.getShortdesc());
         //hotProductViewHolder.textViewTitle.setText("");
         hotProductViewHolder.textViewPrice.setText(String.valueOf(HotProductClass.getPrice()));

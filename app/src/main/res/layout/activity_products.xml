@@ -6,76 +6,143 @@
     android:layout_height="match_parent"
     android:background="@drawable/grad_bg"
     tools:context=".LoginActivity">
-
-
-    <TableLayout
-        android:id="@+id/table1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorHeaderBack">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="10dp"
-                android:layout_height="50dp" />
-
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-
-            <TextView
-                android:id="@+id/text_view_login"
-                android:layout_width="180dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:text="Name"
-                android:textColor="@color/colorAccent"
-                android:textSize="20dp"
-                android:textStyle="italic" />
-
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="5dp"
-                android:background="@mipmap/logout" />
-
-        </TableRow>
-
-    </TableLayout>
-
     <LinearLayout
-        android:layout_below="@+id/table1"
-        android:id="@+id/layoutOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleView01"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_below="@+id/layoutOne"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleView02"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:background="@drawable/title_bar_background"
+            android:orientation="horizontal"
+            android:id="@+id/title_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
-    </RelativeLayout>
+            android:layout_height="50dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/addvertiestment"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"/>
 
 
 
+            <TextView
+                android:textSize="20dp"
+                android:id="@+id/text_view_login"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginLeft="20dp"
+                android:text="Hi Nishan"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_below="@+id/title_bar_layout"
+            android:id="@+id/pizzaHut"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@mipmap/pizza_hut_long_banner"/>
+
+
+        <ScrollView
+            android:layout_margin="5dp"
+            android:layout_below="@+id/pizzaHut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:background="@drawable/btn_background"
+                    android:layout_below="@+id/table1"
+                    android:id="@+id/layoutOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="italic"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/btn_background"
+                        android:padding="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="20dp"
+                        android:id="@+id/txt_view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="    Populer Products"
+                        android:textColor="@color/white"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/txt_view1"
+                        android:id="@+id/recycleView01"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="170dp"
+                        android:src="@mipmap/advertisetment02"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:background="@drawable/btn_background"
+                    android:layout_below="@+id/layoutOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:background="@drawable/btn_background"
+                        android:textStyle="italic"
+                        android:layout_marginRight="20dp"
+                        android:padding="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="20dp"
+                        android:id="@+id/txt_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="    Our Products"
+                        android:textColor="@color/white"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/txt_view"
+                        android:id="@+id/recycleView02"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="170dp"
+                        android:src="@mipmap/advertisetment01"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_open_settings"
+        android:background="@mipmap/option_button_icon"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 </RelativeLayout>
