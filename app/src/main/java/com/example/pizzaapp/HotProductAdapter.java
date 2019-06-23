@@ -46,6 +46,8 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.Ho
         //hotProductViewHolder.textViewRating.setText("");
         hotProductViewHolder.textViewstatus.setText(HotProductClass.getStatus());
         //hotProductViewHolder.textViewstatus.setText("");
+
+
         hotProductViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

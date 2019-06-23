@@ -38,7 +38,7 @@ import java.util.List;
 
 public class ProductsViewActivity extends AppCompatActivity {
     private static String sts_now = "";
-    Dialog myDialog;
+    Dialog dialog;
     RecyclerView recyclerView01, recyclerView02;
     ProductAdapter adapter;
     HotProductAdapter hotAdapter;
@@ -97,15 +97,15 @@ public class ProductsViewActivity extends AppCompatActivity {
             }
         });
 
-        /*ImageView mimageView = (ImageView) findViewById(R.id.image_view);
-        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.addvertiestment)).getBitmap();
+        ImageView mimageView = (ImageView) findViewById(R.id.image_view);
+        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_launcher_foreground)).getBitmap();
         Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
         Canvas canvas = new Canvas(imageRounded);
         Paint mpaint = new Paint();
         mpaint.setAntiAlias(true);
         mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
         canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
-        mimageView.setImageBitmap(imageRounded);*/
+        mimageView.setImageBitmap(imageRounded);
     }
 
 
@@ -222,30 +222,30 @@ public class ProductsViewActivity extends AppCompatActivity {
     }
 
 
-    //floating button error.
-    /*public void openSettingsPopup() {
-        myDialog.setContentView(R.layout.activity_ippopup);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
+    
+    public void openSettingsPopup() {
+        dialog.setContentView(R.layout.activity_ippopup);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
     public void ShowPopup() {
         TextView txtclose;Button popUpIpGet;
         final EditText ipAddressGet;
-        myDialog.setContentView(R.layout.activity_ippopup);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        dialog.setContentView(R.layout.activity_ippopup);
+        txtclose =(TextView) dialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
-        popUpIpGet = myDialog.findViewById(R.id.getIpAdrss);
+        popUpIpGet = dialog.findViewById(R.id.getIpAdrss);
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDialog.dismiss();
+                dialog.dismiss();
             }
         });
 
-        ipAddressGet = myDialog.findViewById(R.id.ipadress);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
+        ipAddressGet = dialog.findViewById(R.id.ipadress);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
 
         popUpIpGet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -254,8 +254,8 @@ public class ProductsViewActivity extends AppCompatActivity {
                 if(UserIdSession.getIpAdress().equals(String.valueOf(ipAddressGet.getText()))){
                     Toast.makeText(ProductsViewActivity.this,"Ip successfully added!",Toast.LENGTH_SHORT).show();
                 }
-                myDialog.dismiss();
+                dialog.dismiss();
             }
         });
-    }*/
+    }
 }

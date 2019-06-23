@@ -5,6 +5,15 @@ public class UserIdSession {
     private static String usId;
     private static String userName;
     private static String ipAdress;
+    private static String itemName;
+
+    public static String getItemName() {
+        return itemName;
+    }
+
+    public static void setItemName(String itemName) {
+        UserIdSession.itemName = itemName;
+    }
 
     public static String getUserName() {
         return userName;

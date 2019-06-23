@@ -57,6 +57,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 intent.putExtra("price", String.valueOf(ProductClass.getPrice()));
                 DouPrice = ProductClass.getPrice();
                 intent.putExtra("DouPrice", DouPrice);
+                UserIdSession.setItemName(ProductClass.getShortdesc());
                 mCtx.startActivity(intent);
             }
         });

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/transparent">
@@ -12,14 +10,14 @@
 
     <LinearLayout
         android:background="@color/transparent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/parent">
 
         <android.support.v7.widget.CardView
-            android:background="@color/transparent"
-            android:layout_width="match_parent"
+            android:background="@color/gradientStart"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp">
 

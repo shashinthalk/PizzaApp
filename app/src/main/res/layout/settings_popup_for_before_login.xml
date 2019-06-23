@@ -34,6 +34,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Settings"/>
+                <Button
+                    android:background="@mipmap/exit_icon"
+                    android:layout_marginTop="50dp"
+                    android:layout_below="@+id/cart_btn"
+                    android:id="@+id/exit_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+                <TextView
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exit"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

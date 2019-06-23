@@ -5,207 +5,215 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:background="@mipmap/backgroundimage"
+    android:background="@drawable/grad_bg"
     tools:context=".SingleViewActivity">
-
-
-    <TableLayout
-        android:id="@+id/table1"
-        android:background="@color/colorHeaderBack"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TableRow
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:background="@drawable/title_bar_background"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/title"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:textColor="@color/colorstasus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Italian Pizza"
+                android:textSize="30sp"/>
+            <Button
+                android:id="@+id/btn_visit_cart"
+                android:layout_marginLeft="50dp"
+                android:background="@mipmap/cart_icon"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_margin="10dp"
+                    android:id="@+id/image"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/title_bar_background"
+                    android:src="@mipmap/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/title_bar_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/Price"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Price : Rs.1100.00"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"/>
 
-            <TextView
-                android:layout_width="10dp"
-                android:layout_height="50dp"/>
+                    <TextView
+                        android:id="@+id/description_text"
+                        android:textStyle="italic"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="As this is just a custom ImageView and not a custom Drawable or a combination of both, it can be used with all kinds of drawables"/>
 
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/Rating"
+                            android:text="2.7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:background="@drawable/title_bar_background"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:backgroundTint="@color/gradientEnd"/>
 
-            <Button
-                android:id="@+id/btn_checkout"
-                android:layout_marginTop="5dp"
-                android:padding="2dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@mipmap/checkout"/>
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/Status"
+                            android:text="Spiecy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:background="@drawable/title_bar_background"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:backgroundTint="@color/orange"/>
+                    </LinearLayout>
 
-            <TextView
-                android:textColor="@color/colorAccent"
-                android:textStyle="italic"
-                android:text="Items: No"
-                android:layout_marginTop="14dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="13dp"
-                android:id="@+id/itemCount"
-                android:layout_width="180dp"
-                android:layout_height="25dp"/>
+                    <LinearLayout
+                        android:layout_margin="10dp"
+                        android:background="@drawable/title_bar_background"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/countDes"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:text="How much do you want?"/>
+                        <Button
+                            android:id="@+id/minus"
+                            android:layout_marginLeft="20dp"
+                            android:background="@mipmap/minus"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+                        <TextView
+                            android:id="@+id/count"
+                            android:textSize="17dp"
+                            android:layout_marginLeft="10dp"
+                            android:padding="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"/>
 
-            <Button
-                android:id="@+id/btn_logout"
-                android:background="@mipmap/logout"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="5dp"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
-
-        </TableRow>
-
-    </TableLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-        <ImageView
-            android:id="@+id/image"
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:src="@drawable/ic_launcher_background"/>
-
-        <TextView
-
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/image"
-            android:id="@+id/title"
-            android:layout_width="350dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
-            android:textSize="30sp"
-            android:text="DUmmy 01"/>
-
-        <TextView
-            android:id="@+id/Rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
-            android:layout_alignRight="@+id/title"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPrimary"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="4.7"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-            android:textStyle="bold" />
-
-        <TextView
-
-            android:id="@+id/Status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Rating"
-            android:layout_marginTop="3dp"
-            android:layout_alignRight="@+id/title"
-            android:layout_marginLeft="5dp"
-            android:background="@color/colorstasus"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="4.7"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/description_text"
-            android:layout_marginTop="15dp"
-            android:textStyle="italic"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@+id/title"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"/>
-
-        <TextView
-
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/description_text"
-            android:id="@+id/Price"
-            android:layout_width="350dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
-            android:textSize="25sp"
-            android:text="DUmmy 01"/>
-
-
-        <TextView
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/Price"
-            android:id="@+id/countDes"
-            android:layout_width="180dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
-            android:textSize="15sp"
-            android:text="How much do you want? :"/>
-
-
-        <TextView
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/countDes"
-            android:id="@+id/warning"
-            android:layout_width="180dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorstasus"
-            android:textSize="15sp"
-            android:text="Cart full ! "/>
-
-        <Button
-            android:id="@+id/minus"
-            android:layout_marginTop="8dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/Price"
-            android:layout_marginLeft="190dp"
-            android:text="-"
-            android:background="@mipmap/minus"/>
-
-        <TextView
-
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="220dp"
-            android:layout_below="@+id/Price"
-            android:id="@+id/count"
-            android:layout_width="20dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
-            android:textSize="15sp"
-            android:text="1"/>
-
-        <Button
-            android:id="@+id/plus"
-            android:layout_marginLeft="235dp"
-            android:layout_marginTop="8dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/Price"
-            android:textSize="5dp"
-            android:background="@mipmap/plus"/>
-
-
-        <Button
-            android:id="@+id/addtocart"
-            android:layout_width="150dp"
-            android:layout_height="38dp"
-            android:background="@mipmap/addtocart"
-            android:layout_below="@+id/plus"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="170dp"/>
-    </RelativeLayout>
-
-
+                        <Button
+                            android:id="@+id/plus"
+                            android:layout_marginLeft="10dp"
+                            android:background="@mipmap/plus"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_margin="5dp"
+                        android:background="@drawable/title_bar_background"
+                        android:padding="10dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_marginBottom="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/itemCount"
+                                android:textStyle="bold"
+                                android:textSize="15dp"
+                                android:textColor="@color/Black"
+                                android:text="items : 0"
+                                android:layout_marginRight="30dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/warning"
+                                android:textStyle="bold"
+                                android:textColor="@color/gradientEnd"
+                                android:textSize="15dp"
+                                android:text="Cart Empty!"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <Button
+                            android:onClick="addtocart"
+                            android:textSize="10dp"
+                            android:id="@+id/addtocart"
+                            android:paddingRight="15dp"
+                            android:paddingLeft="15dp"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:text="Add to Cart"
+                            android:background="@drawable/btn_background"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_gravity="right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_marginBottom="20dp"
+                        android:src="@mipmap/safe_checkout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <Button
+        android:onClick="open_settings"
+        android:background="@mipmap/option_button_icon"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 </RelativeLayout>
