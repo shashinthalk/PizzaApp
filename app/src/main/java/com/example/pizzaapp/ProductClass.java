@@ -3,7 +3,7 @@ package com.example.pizzaapp;
 public class ProductClass {
 
     private int id;
-    private String title,shortdesc ,sts_now;
+    private String title,shortDescription ,sts_now;
     private double rating;
     private double price;
     private String image;
@@ -15,7 +15,7 @@ public class ProductClass {
     public ProductClass(int id, String title, String shortdesc, double rating, double price, String image, String status, String sts_now) {
         this.id = id;
         this.title = title;
-        this.shortdesc = shortdesc;
+        this.shortDescription = shortdesc;
         this.rating = rating;
         this.price = price;
         this.image = image;
@@ -39,7 +39,7 @@ public class ProductClass {
     }
 
     public String getShortdesc() {
-        return shortdesc;
+        return shortDescription;
     }
 
     public double getRating() {
